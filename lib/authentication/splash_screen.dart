@@ -2,7 +2,7 @@
 import 'dart:developer';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:proms_mobile/authentication/signin.dart';
+import 'package:proms_mobile/authentication/login.dart';
 import 'package:proms_mobile/authentication/first_time_login.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
       //check if logged in already?
       setState(() {
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => SignInScreen()),
+            MaterialPageRoute(builder: (context) => LoginScreen()),
             (route) => false);
       });
     });
@@ -40,12 +40,9 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Theme.of(context).colorScheme.secondary,
-            Theme.of(context).primaryColor
-          ],
-          begin: const FractionalOffset(0, 0),
-          end: const FractionalOffset(1.0, 0.0),
+          colors: [Color(0xffc47500), Color(0xff0c82df)],
+          begin: Alignment.bottomRight,
+          end: Alignment.topLeft,
           stops: const [0.0, 1.0],
           tileMode: TileMode.clamp,
         ),
@@ -82,3 +79,4 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+      

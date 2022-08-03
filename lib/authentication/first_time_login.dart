@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
+
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:proms_mobile/authentication/signin.dart';
-import 'constants.dart';
+import 'package:proms_mobile/authentication/login.dart';
 
 class FirstTimeLoginScreen extends StatefulWidget {
   const FirstTimeLoginScreen({Key? key}) : super(key: key);
@@ -46,7 +46,7 @@ class _FirstTimeLoginScreenState extends State<FirstTimeLoginScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => SignInScreen())));
+                                builder: ((context) => LoginScreen())));
                       },
                       child: const Text('Login'))),
           userAvailable
