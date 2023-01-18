@@ -1,9 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-import 'dart:developer';
+// ignore_for_file: prefer_const_literals_to_create_immutables
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:proms_mobile/authentication/login.dart';
-import 'package:proms_mobile/authentication/first_time_login.dart';
+import 'package:proms_mobile/screens/authentication/login.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key, required this.title}) : super(key: key);
@@ -18,16 +16,16 @@ class _SplashScreenState extends State<SplashScreen> {
   bool isVisible = false;
 
   _SplashScreenState() {
-    Timer(const Duration(milliseconds: 2000), () {
+    Timer(const Duration(milliseconds: 1600), () {
       //check if logged in already?
       setState(() {
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => LoginScreen()),
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
             (route) => false);
       });
     });
 
-    Timer(Duration(milliseconds: 10), () {
+    Timer(const Duration(milliseconds: 100), () {
       setState(() {
         isVisible =
             true; // Now it is showing fade effect and navigating to Login page
@@ -38,18 +36,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [Color(0xffc47500), Color(0xff0c82df)],
           begin: Alignment.bottomRight,
           end: Alignment.topLeft,
-          stops: const [0.0, 1.0],
+          stops: [0.0, 1.0],
           tileMode: TileMode.clamp,
         ),
       ),
       child: AnimatedOpacity(
         opacity: isVisible ? 1.0 : 0,
-        duration: Duration(milliseconds: 1200),
+        duration: const Duration(milliseconds: 1200),
         child: Center(
           child: Container(
             height: 140.0,
@@ -61,11 +59,11 @@ class _SplashScreenState extends State<SplashScreen> {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.3),
                     blurRadius: 2.0,
-                    offset: Offset(5.0, 3.0),
+                    offset: const Offset(5.0, 3.0),
                     spreadRadius: 2.0,
                   )
                 ]),
-            child: Center(
+            child: const Center(
               child: ClipOval(
                 child: Icon(
                   Icons.android_outlined,
@@ -74,9 +72,8 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
           ),
-        ),
-      ),
-    );
+        ), //everything start from the very center
+      ), //inherit
+    ); //inherit parent (MaterialApp)
   }
 }
-      

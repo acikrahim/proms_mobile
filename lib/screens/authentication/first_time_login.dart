@@ -2,7 +2,7 @@
 
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:proms_mobile/authentication/login.dart';
+import 'package:proms_mobile/screens/authentication/login.dart';
 
 class FirstTimeLoginScreen extends StatefulWidget {
   const FirstTimeLoginScreen({Key? key}) : super(key: key);
