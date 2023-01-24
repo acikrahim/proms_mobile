@@ -1,21 +1,23 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'package:proms_mobile/screens/authentication/forgot_password.dart';
+import 'package:proms_mobile/screens/authentication/login.dart';
+
 import 'package:proms_mobile/widgets/auth_header.dart';
 import 'package:proms_mobile/shared/colors.dart';
 import 'package:proms_mobile/shared/button_style.dart';
 import 'package:proms_mobile/shared/text_style.dart';
 import 'package:proms_mobile/shared/input_style.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  // ignore: library_private_types_in_public_api
+  _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final Key _formKey = GlobalKey<FormState>();
 
   @override
@@ -35,10 +37,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     Text(
-                      'Hello!',
+                      'Welcome!',
                       style: TxtStyle().h2(),
                     ),
-                    Text('Sign in into your account',
+                    Text('Did you forgot your password?',
                         style: TxtStyle().h6Grey()),
                     const SizedBox(height: 30),
                     Form(
@@ -47,46 +49,44 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             TextFormField(
                               decoration: InputStyle().textInputAuth(
-                                  'User Name', 'Enter your user name'),
-                            ),
-                            const SizedBox(height: 15),
-                            TextFormField(
-                              obscureText: true,
-                              decoration: InputStyle().textInputAuth(
-                                  'Password', 'Enter your password'),
+                                  'Email', 'Enter your email'),
                             ),
                           ],
                         )),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(10, 0, 10, 20),
-                      alignment: Alignment.topRight,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const ForgotPasswordScreen()),
-                          );
-                        },
-                        child: const Text(
-                          "Forgot your password?",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontFamily: 'SpaceGrotesk',
-                          ),
+                    const SizedBox(height: 60),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            style: BtnStyle().backButton(),
+                            child: Text(
+                              'back'.toUpperCase(),
+                              style: TxtStyle().btnText(),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const LoginScreen()),
+                            );
+                            },
+                          )
                         ),
-                      ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: ElevatedButton(
+                            style: BtnStyle().submitBtn(),
+                            child: Text(
+                              'submit'.toUpperCase(),
+                              style: TxtStyle().btnText(),
+                            ),
+                            onPressed: () {},
+                          )
+                        ) 
+                      ],
                     ),
-                    const SizedBox(height: 40),
-                    ElevatedButton(
-                      style: BtnStyle().submitBtn(),
-                      child: Text(
-                        'Sign In'.toUpperCase(),
-                        style: TxtStyle().btnText(),
-                      ),
-                      onPressed: () {},
-                    ),
+                    
                     Container(
                         margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                         child: Text.rich(TextSpan(children: [

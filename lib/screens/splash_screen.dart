@@ -2,6 +2,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:proms_mobile/screens/authentication/login.dart';
+// import 'package:proms_mobile/screens/authentication/first_time_login.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key, required this.title}) : super(key: key);
@@ -68,12 +69,12 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Icon(
                   Icons.android_outlined,
                   size: 128,
-                ), //put your logo here
+                ),
               ),
             ),
           ),
-        ), //everything start from the very center
-      ), //inherit
-    ); //inherit parent (MaterialApp)
+        ),
+      ),
+    );
   }
 }

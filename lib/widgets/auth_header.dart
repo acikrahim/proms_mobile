@@ -1,6 +1,5 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_new, library_private_types_in_public_api, no_logic_in_create_state
 import 'package:flutter/material.dart';
-import 'package:proms_mobile/shared/helper.dart';
+import 'package:proms_mobile/shared/skyline_painter.dart';
 
 class AuthHeader extends StatefulWidget {
   final double _height;
@@ -36,8 +35,8 @@ class _AuthHeaderState extends State<AuthHeader> {
               Offset(width, _height - 18)
             ]),
             child: Container(
-              decoration: new BoxDecoration(
-                gradient: new LinearGradient(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
                     colors: [
                       Theme.of(context).primaryColor.withOpacity(0.4),
                       Theme.of(context).colorScheme.secondary.withOpacity(0.4),
@@ -50,15 +49,15 @@ class _AuthHeaderState extends State<AuthHeader> {
             ),
           ),
           ClipPath(
-            clipper: new ShapeClipper([
+            clipper: ShapeClipper([
               Offset(width / 3, _height + 20),
               Offset(width / 10 * 8, _height - 60),
               Offset(width / 5 * 4, _height - 60),
               Offset(width, _height - 20)
             ]),
             child: Container(
-              decoration: new BoxDecoration(
-                gradient: new LinearGradient(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
                     colors: [
                       Theme.of(context).primaryColor.withOpacity(0.4),
                       Theme.of(context).colorScheme.secondary.withOpacity(0.4),
@@ -71,15 +70,15 @@ class _AuthHeaderState extends State<AuthHeader> {
             ),
           ),
           ClipPath(
-            clipper: new ShapeClipper([
+            clipper: ShapeClipper([
               Offset(width / 5, _height),
               Offset(width / 2, _height - 40),
               Offset(width / 5 * 4, _height - 80),
               Offset(width, _height - 20)
             ]),
             child: Container(
-              decoration: new BoxDecoration(
-                gradient: new LinearGradient(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
                     colors: [
                       Theme.of(context).primaryColor,
                       Theme.of(context).colorScheme.secondary,
@@ -113,7 +112,7 @@ class ShapeClipper extends CustomClipper<Path> {
   ShapeClipper(this._offsets);
   @override
   Path getClip(Size size) {
-    var path = new Path();
+    var path = Path();
 
     path.lineTo(0.0, size.height - 20);
     path.quadraticBezierTo(
