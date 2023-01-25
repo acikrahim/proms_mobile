@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import 'package:proms_mobile/screens/home/bottom_nav.dart';
 import 'package:proms_mobile/screens/authentication/forgot_password.dart';
 import 'package:proms_mobile/widgets/auth_header.dart';
 import 'package:proms_mobile/shared/colors.dart';
@@ -12,6 +13,7 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _LoginScreenState createState() => _LoginScreenState();
 }
 
@@ -85,7 +87,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Sign In'.toUpperCase(),
                         style: TxtStyle().btnText(),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const BottomNav()),
+                        );
+                      },
                     ),
                     Container(
                         margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),

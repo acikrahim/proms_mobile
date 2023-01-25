@@ -22,7 +22,7 @@ class BtnStyle {
           borderRadius: BorderRadius.circular(30.0),
         ),
       ),
-      backgroundColor: MaterialStateProperty.all(Colors.red.shade800),
+      backgroundColor: MaterialStateProperty.all(Colors.redAccent.shade700),
       shadowColor: MaterialStateProperty.all(Colors.transparent),
     );
   }
