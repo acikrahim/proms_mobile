@@ -9,7 +9,7 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> {
-  int _page = 0;
+  int _page = 2;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   @override
@@ -18,9 +18,11 @@ class _BottomNavState extends State<BottomNav> {
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
           items: const <Widget>[
-            Icon(Icons.add, size: 26),
-            Icon(Icons.list, size: 26),
-            Icon(Icons.compare_arrows, size: 26),
+            Icon(Icons.event_note_sharp, size: 26),
+            Icon(Icons.receipt_sharp, size: 26),
+            Icon(Icons.home_sharp, size: 26),
+            Icon(Icons.notification_important_sharp, size: 26),
+            Icon(Icons.account_circle_sharp, size: 26)
           ],
           color: AppColor.bgColor,
           buttonBackgroundColor: AppColor.bgColor,
