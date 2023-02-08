@@ -1,15 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'package:proms_mobile/screens/authentication/login.dart';
+import '/screens/authentication/login.dart';
 
-import 'package:proms_mobile/widgets/auth_header.dart';
-import 'package:proms_mobile/shared/colors.dart';
-import 'package:proms_mobile/shared/button_style.dart';
-import 'package:proms_mobile/shared/text_style.dart';
-import 'package:proms_mobile/shared/input_style.dart';
+import '/widgets/auth_header.dart';
+import '/shared/colors.dart';
+import '/shared/styles/button_style.dart';
+import '/shared/styles/text_style.dart';
+import '/shared/styles/input_style.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
+  static const routeName = '/forgot-password';
   const ForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
@@ -27,9 +28,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               height: 320,
-              child: AuthHeader(320, true, Icons.login_rounded),
+              child: AuthHeader(),
             ),
             Container(
                 padding: const EdgeInsets.all(4.0),
@@ -48,8 +49,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         child: Column(
                           children: [
                             TextFormField(
-                              decoration: InputStyle().textInputAuth(
-                                  'Email', 'Enter your email'),
+                              decoration: InputStyle()
+                                  .textInputAuth('Email', 'Enter your email'),
                             ),
                           ],
                         )),
@@ -57,36 +58,32 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     Row(
                       children: [
                         Expanded(
-                          child: ElevatedButton(
-                            style: BtnStyle().backButton(),
-                            child: Text(
-                              'back'.toUpperCase(),
-                              style: TxtStyle().btnText(),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
+                            child: ElevatedButton(
+                          style: BtnStyle().backButton(),
+                          child: Text(
+                            'back'.toUpperCase(),
+                            style: TxtStyle().btnText(),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const LoginScreen()),
+                                  builder: (context) => const LoginScreen()),
                             );
-                            },
-                          )
-                        ),
+                          },
+                        )),
                         const SizedBox(width: 12),
                         Expanded(
-                          child: ElevatedButton(
-                            style: BtnStyle().submitBtn(),
-                            child: Text(
-                              'submit'.toUpperCase(),
-                              style: TxtStyle().btnText(),
-                            ),
-                            onPressed: () {},
-                          )
-                        ) 
+                            child: ElevatedButton(
+                          style: BtnStyle().submitBtn(),
+                          child: Text(
+                            'submit'.toUpperCase(),
+                            style: TxtStyle().btnText(),
+                          ),
+                          onPressed: () {},
+                        ))
                       ],
                     ),
-                    
                     Container(
                         margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                         child: Text.rich(TextSpan(children: [

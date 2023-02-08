@@ -2,9 +2,10 @@
 
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:proms_mobile/screens/authentication/login.dart';
+import '/screens/authentication/login.dart';
 
 class FirstTimeLoginScreen extends StatefulWidget {
+  static const routeName = '/first-time-login';
   const FirstTimeLoginScreen({Key? key}) : super(key: key);
 
   @override

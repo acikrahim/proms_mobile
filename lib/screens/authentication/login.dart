@@ -1,15 +1,21 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import 'package:proms_mobile/screens/home/bottom_nav.dart';
-import 'package:proms_mobile/screens/authentication/forgot_password.dart';
-import 'package:proms_mobile/widgets/auth_header.dart';
-import 'package:proms_mobile/shared/colors.dart';
-import 'package:proms_mobile/shared/button_style.dart';
-import 'package:proms_mobile/shared/text_style.dart';
-import 'package:proms_mobile/shared/input_style.dart';
+import '../main/bottom_nav.dart';
+import '/screens/authentication/forgot_password.dart';
+import '/widgets/auth_header.dart';
+import '/shared/colors.dart';
+import '/shared/styles/button_style.dart';
+import '/shared/styles/text_style.dart';
+import '/shared/styles/input_style.dart';
+
+import '/shared/apis/auth_service.dart';
+import '/models/login_response.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/login';
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
@@ -18,7 +24,35 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final Key _formKey = GlobalKey<FormState>();
+  final Future<SharedPreferences> _sharedPreferences =
+      SharedPreferences.getInstance();
+  final _storage = const FlutterSecureStorage();
+  final _loginForm = GlobalKey<FormState>();
+  late String identifier;
+  late String _password;
+
+  Future<void> _login(BuildContext ctx) async {
+    final SharedPreferences sharedPreferences = await _sharedPreferences;
+
+    _loginForm.currentState?.save();
+    bool? valid = _loginForm.currentState?.validate();
+    if (valid != null && valid) {
+      LoginResponse? loginResponse =
+          await AuthService().login(identifier, _password);
+      if (loginResponse != null) {
+        await _storage.write(key: 'jwt', value: loginResponse.jwt);
+
+        await sharedPreferences.setString(
+            'user', userToJson(loginResponse.user));
+
+        await sharedPreferences.setBool('isLoggedIn', true);
+
+        Navigator.of(ctx).push(
+          MaterialPageRoute(builder: (context) => const BottomNav()),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +61,9 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               height: 320,
-              child: AuthHeader(320, true, Icons.login_rounded),
+              child: AuthHeader(),
             ),
             Container(
                 padding: const EdgeInsets.all(4.0),
@@ -44,18 +78,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TxtStyle().h6Grey()),
                     const SizedBox(height: 30),
                     Form(
-                        key: _formKey,
+                        key: _loginForm,
                         child: Column(
                           children: [
                             TextFormField(
                               decoration: InputStyle().textInputAuth(
                                   'User Name', 'Enter your user name'),
+                              textInputAction: TextInputAction.next,
+                              onSaved: (value) => identifier = value!,
                             ),
                             const SizedBox(height: 15),
                             TextFormField(
                               obscureText: true,
                               decoration: InputStyle().textInputAuth(
                                   'Password', 'Enter your password'),
+                              onSaved: (value) => _password = value!,
                             ),
                           ],
                         )),
@@ -88,11 +125,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TxtStyle().btnText(),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const BottomNav()),
-                        );
+                        _login(context);
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const BottomNav()),
+                        // );
                       },
                     ),
                     Container(

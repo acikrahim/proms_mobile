@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:proms_mobile/screens/main/bottom_nav.dart';
 import 'package:proms_mobile/screens/authentication/login.dart';
-// import 'package:proms_mobile/screens/authentication/first_time_login.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const routeName = '/';
+
   const SplashScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
@@ -14,23 +17,35 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final Future<SharedPreferences> _sharedPreferences =
+      SharedPreferences.getInstance();
   bool isVisible = false;
+  bool isLoggedIn = false;
 
   _SplashScreenState() {
+    _getLoginResult();
     Timer(const Duration(milliseconds: 1600), () {
-      //check if logged in already?
       setState(() {
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const LoginScreen()),
+            MaterialPageRoute(
+                builder: (context) => isLoggedIn && isLoggedIn
+                    ? const LoginScreen()
+                    : const LoginScreen()),
             (route) => false);
       });
     });
 
-    Timer(const Duration(milliseconds: 100), () {
-      setState(() {
-        isVisible =
-            true; // Now it is showing fade effect and navigating to Login page
+    Timer(const Duration(milliseconds: 10), () {
+      setState(() async {
+        isVisible = true;
       });
+    });
+  }
+
+  void _getLoginResult() async {
+    final SharedPreferences sharedPreferences = await _sharedPreferences;
+    setState(() {
+      isLoggedIn = (sharedPreferences.getBool('isLoggedIn')) as bool;
     });
   }
 
